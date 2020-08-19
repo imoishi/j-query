@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JQuery & Forms</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <form id="myForm">
+    <div>
+      <label for="">Name: </label><br>
+      <input type="text">
+    </div>
+    <div>
+      <label for="">Email: </label><br>
+      <input type="text">
+    </div>
+    <div>
+      <label for="">Location: </label><br>
+      <input type="text" value="Dhaka">
+    </div>
+    <div>
+      <label for="">Category: </label><br>
+      <select>
+        <option value="1">Category 1</option>
+        <option value="2">Category 2</option>
+        <option value="3">Category 3</option>
+      </select>
+    </div>
+    <input type="submit" value="Submit">
+  </form>
+
+  <br><br>
+  <div id="output"></div>
+
+
+  <script>
+    $(document).ready(function(){
+      //focus & blur events
+      $('#myForm input').focus(function(){
+        $(this).css('background', 'pink');
+
+        $(this).blur(function(){
+          $(this).css('background', 'none');
+        });
+      });
+
+      //change event
+      $('#myForm select').change(function(){
+        var cat = "";
+        $('select option:selected').each(function(){
+          cat += $(this).text() + " ";
+        });
+        $('#output').text(cat);
+      });
+
+      //select event
+      $('input').select(function(){
+        $('#output').text('Something was selected').
+        show().fadeOut(1000);
+      });
+
+      //submit event
+      $('#myForm').submit(function(e){
+        e.preventDefault();
+        $('#output').text('From Submitted');
+      });
+
+      //keyup and keydown events
+      $('#myForm input').keydown(function(){
+        $('#output').text('you are typing..');
+        $(this).keyup(function(){
+          $('#output').text('');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
